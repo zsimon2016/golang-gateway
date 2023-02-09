@@ -13,3 +13,12 @@
 - basePath  etcd 服务注册路径，一般无需修改，各个微服务也是注册在这个路径下的。
 
 - configPath  配置文件路径，默认./config.json 可以自行指定。这个文件内容其实是可以用其他配置中心所替代，后期会有升级。原来只需要一个nacos就可以，因为轻量化，把配置中心去除了。配置文件中的gatewayAddress、services_list、redis字段名请不要修改。services_list中的key是微服务向注册中心注册的服务名称，注意val的首字母应该大写。
+
+
+### 微服务启动  
+``` go run service.go```  
+启动方式相同，确保注册地址与网关保持一致
+
+### 访问方式  
+假设网关所在服务器在本地。名为bi的微服务有一个方法叫do，则用以下方式请求，uni是公开访问，acc则是受限访问，可以加入鉴权等功能。可在配置文件中调整。
+http://localhost:9092/v1/uni/bi/do，支持post,get;
